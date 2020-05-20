@@ -33,8 +33,8 @@ Function OutputResultFile(resultFile As Workbook)
 
 'ÉGÉâÅ[èàóù
 Error1:
-    ActiveWorkbook.Close
-    'ActiveWorkbook.Close savechanges:=False
+    'ActiveWorkbook.Close
+    ActiveWorkbook.Close savechanges:=False
     MsgBox "ï€ë∂Ç≥ÇÍÇ‹ÇπÇÒÇ≈ÇµÇΩ"
     Err.Clear
 

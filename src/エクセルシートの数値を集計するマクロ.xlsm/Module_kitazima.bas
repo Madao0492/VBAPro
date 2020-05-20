@@ -72,7 +72,7 @@ Function ProcessBooks(foPath As String, fiName() As String, resultSheet As Works
             ' 取得した値を足して出力する（Owner ooba）
             Call Sumcells(fCell, resultSheet, targetCell.Address)
         Next
-        Workbooks(fiName(i)).Close SaveChanges:=False   '上書きせずファイルを閉じる
+        Workbooks(fiName(i)).Close savechanges:=False   '上書きせずファイルを閉じる
     Next i
     
 End Function
