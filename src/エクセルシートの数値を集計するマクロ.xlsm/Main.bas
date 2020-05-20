@@ -30,7 +30,7 @@ Sub エクセルシートの数値を集計するマクロ()
     
 '-----メイン処理開始-----
     ' 一つ一つファイルを開き、処理を実行を取得（Owner kitazima）
-    Call ProcessBooks(targetFolderPath, targetFileNames, targetSheet, resultSheet, sCell, eCell)
+    Call ProcessBooks(targetFolderPath, targetFileNames, targetSheet, resultFile, resultSheet, sCell, eCell)
 '-----メイン処理終了-----
     
 '-----最終処理開始-----

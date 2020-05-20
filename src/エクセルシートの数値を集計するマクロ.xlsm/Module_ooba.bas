@@ -35,3 +35,16 @@ Attribute VB_Name = "Module_ooba"
 
  End Function
 
+ Function WriteLog(resultFile As Workbook, rNum As Integer, message As String)
+    
+    Dim ws As Worksheet
+    
+    If rNum = 1 Then '初回ログ出力（1行目）の場合
+        Set ws = resultFile.Worksheets.Add
+        ws.Name = "Log"
+    End If
+ 
+    resultFile.Worksheets("Log").Range("A" & rNum).Value = message
+    rNum = rNum + 1
+
+ End Function

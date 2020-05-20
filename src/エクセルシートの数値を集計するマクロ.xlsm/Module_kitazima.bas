@@ -43,12 +43,14 @@ Function SelectBooks(foPath As String, fiName() As String)
     
 End Function
 
-Function ProcessBooks(foPath As String, fiName() As String, targetSheet As String, resultSheet As Worksheet, sCell As String, eCell As String)
+Function ProcessBooks(foPath As String, fiName() As String, targetSheet As String, resultFile As Workbook, resultSheet As Worksheet, sCell As String, eCell As String)
     Dim i As Integer
     Dim sum As Double
     Dim fCell As Double
+    Dim rNum As Integer 'ログ出力行
     
     sum = 0
+    rNum = 1
     
     'ファイル名のみの比較
     '（フォルダパスは比較しないが、ファイル名が同一のファイルを開くとエラーとなるため回避要）
@@ -64,13 +66,15 @@ Function ProcessBooks(foPath As String, fiName() As String, targetSheet As Strin
     
     For i = 0 To UBound(fiName)
         Workbooks.Open foPath & "\" & fiName(i) '開く
-        
+        Call WriteLog(resultFile, rNum, "ファイル " & fiName(i) & " を開きました")
         Worksheets(targetSheet).Range(sCell & ":" & eCell).Select
         For Each targetCell In Selection.Cells
             ' セルを指定して、値を返す（Owner kinoshita）
             fCell = Kagebunshin("テスト", targetCell.Address)
+            Call WriteLog(resultFile, rNum, "ファイル " & fiName(i) & " の " & targetCell.Address & " セルを読み込みました")
             ' 取得した値を足して出力する（Owner ooba）
             Call Sumcells(fCell, resultSheet, targetCell.Address)
+            Call WriteLog(resultFile, rNum, "出力先ファイルの " & targetCell.Address & " に値を書き込みました")
         Next
         Workbooks(fiName(i)).Close savechanges:=False   '上書きせずファイルを閉じる
     Next i
