@@ -4,6 +4,7 @@ Sub エクセルシートの数値を集計するマクロ()
 '-----変数宣言開始-----
     Dim targetFolderPath As String  '作業対象フォルダ
     Dim targetFileNames() As String '作業対象エクセルシート名（配列）
+    Dim targetSheet As String '作業対象シート名
     
     Dim resultFileName As String  '結果出力エクセルファイル名
     Dim resultFile As Workbook    '結果出力エクセルブック
@@ -14,6 +15,7 @@ Sub エクセルシートの数値を集計するマクロ()
 '-----変数宣言終了-----
 
 '-----変数値設定開始-----
+    targetSheet = "テスト"
     sCell = "H3"
     eCell = "BE5"
 '-----変数値設定終了-----
@@ -28,7 +30,7 @@ Sub エクセルシートの数値を集計するマクロ()
     
 '-----メイン処理開始-----
     ' 一つ一つファイルを開き、処理を実行を取得（Owner kitazima）
-    Call ProcessBooks(targetFolderPath, targetFileNames, resultSheet, sCell, eCell)
+    Call ProcessBooks(targetFolderPath, targetFileNames, targetSheet, resultSheet, sCell, eCell)
 '-----メイン処理終了-----
     
 '-----最終処理開始-----
