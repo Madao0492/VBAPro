@@ -43,10 +43,10 @@ Function SelectBooks(foPath As String, fiName() As String)
     
 End Function
 
-Function ProcessBooks(foPath As String, fiName() As String, resultSheet As Worksheet)
+Function ProcessBooks(foPath As String, fiName() As String, resultSheet As Worksheet, sCell As String, eCell As String)
     Dim i As Integer
     Dim sum As Double
-    Dim fcell As Double
+    Dim fCell As Double
     
     sum = 0
     
@@ -64,10 +64,14 @@ Function ProcessBooks(foPath As String, fiName() As String, resultSheet As Works
     
     For i = 0 To UBound(fiName)
         Workbooks.Open foPath & "\" & fiName(i) '開く
-        ' セルを指定して、値を返す（Owner kinoshita）
-        fcell = Kagebunshin("テスト", "H3")
-        ' 取得した値を足して出力する（Owner ooba）
-        Call Sumcells(sum, fcell, resultSheet)
+        
+        Worksheets("テスト").Range(sCell & ":" & eCell).Select
+        For Each targetCell In Selection.Cells
+            ' セルを指定して、値を返す（Owner kinoshita）
+            fCell = Kagebunshin("テスト", targetCell.Address)
+            ' 取得した値を足して出力する（Owner ooba）
+            Call Sumcells(fCell, resultSheet, targetCell.Address)
+        Next
         Workbooks(fiName(i)).Close SaveChanges:=False   '上書きせずファイルを閉じる
     Next i
     
